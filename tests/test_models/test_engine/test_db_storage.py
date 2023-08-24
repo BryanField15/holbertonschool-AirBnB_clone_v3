@@ -18,6 +18,7 @@ import json
 import os
 import pep8
 import unittest
+import datetime
 DBStorage = db_storage.DBStorage
 classes = {"Amenity": Amenity, "City": City, "Place": Place,
            "Review": Review, "State": State, "User": User}
@@ -66,6 +67,22 @@ test_db_storage.py'])
                              "{:s} method needs a docstring".format(func[0]))
             self.assertTrue(len(func[1].__doc__) >= 1,
                             "{:s} method needs a docstring".format(func[0]))
+
+class TestDBStorage(unittest.TestCase):
+    """Test the DBStorage class"""
+
+    def test_get_with_cls_as_none(self):
+        """Test get() when cls is none"""
+        actual = models.storage.get(None, '1')
+        expected = None
+        self.assertEqual(actual, expected)
+
+    def test_get_with_state_class(self):
+        """Test get() when given a class and a state"""
+        expected = State(id='9a649fdb-15c9-4d01-bd56-0f8ea29a0')
+        expected.save()
+        actual = models.storage.get(State, '9a649fdb-15c9-4d01-bd56-0f8ea29a0')
+        self.assertEqual(actual, expected)
 
 
 class TestFileStorage(unittest.TestCase):
