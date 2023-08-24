@@ -9,8 +9,8 @@ app = Flask(__name__)
 app.register_blueprint(app_views)
 
 @app.teardown_appcontext
-"""Closes storage on teardown"""
 def close_storage(exception=None):
+    """Closes storage on teardown"""
     storage.close()
 
 if __name__ == "__main__":
