@@ -113,3 +113,38 @@ class TestFileStorage(unittest.TestCase):
         with open("file.json", "r") as f:
             js = f.read()
         self.assertEqual(json.loads(string), json.loads(js))
+
+    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
+    def test_get_with_cls_as_none(self):
+        """Test get() when cls is none"""
+        storage = FileStorage()
+        actual = models.storage.get(None, '1')
+        expected = None
+        self.assertEqual(actual, expected)
+
+    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
+    def test_get_with_state_class(self):
+        """Test get() when given a class and a state"""
+        storage = FileStorage()
+        expected = State(id='9a649fdb-15c9-4d01-bd56-0f8ea29a0')
+        expected.save()
+        actual = models.storage.get(State, '9a649fdb-15c9-4d01-bd56-0f8ea29a0')
+        self.assertEqual(actual, expected)
+
+    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
+    def test_count_with_none(self):
+        """Test that count() returns number of all objects in storage
+        if cls is none"""
+        storage = FileStorage()
+        all_obj = len(storage.all())
+        current_count = models.storage.count()
+        self.assertEqual(all_obj, current_count)
+
+    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
+    def test_count_with_new_state_object(self):
+        """Test that count() of State increases by one"""
+        storage = FileStorage()
+        current_count = models.storage.count(State)
+        new_state = State('Betty')
+        new_state.save()
+        self.assertEqual(models.storage.count(State), current_count + 1)
