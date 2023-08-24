@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Instanciates app_view blueprint and imports all indexes"""
 from flask import Blueprint
 
 app_views = Blueprint('app_views', __name__, url_prefix='/api/v1')
