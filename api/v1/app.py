@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" does appy things"""
+"""Does flask appy things"""
 from flask import Flask, current_app
 from models import storage
 from api.v1.views import app_views
@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.register_blueprint(app_views)
 
 @app.teardown_appcontext
-""" closes storage"""
+"""Closes storage on teardown"""
 def close_storage(exception=None):
     storage.close()
 
