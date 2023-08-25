@@ -20,6 +20,7 @@ def get_reviews(place_id):
 
 @app_views.route('/reviews/<review_id>', methods=['GET'], strict_slashes=False)
 def get_review(review_id):
+    """Retrieves a Review object"""
     review = storage.get(User, review_id)
     if not review:
         abort(404)
@@ -28,6 +29,7 @@ def get_review(review_id):
 
 @app_views.route('/reviews/<review_id>', methods=['DELETE'], strict_slashes=False)
 def delete_review(review_id):
+    """Deletes a Review object"""
     review = storage.get(User, review_id)
     if not review:
         abort(404)
@@ -61,6 +63,7 @@ def post_review(place_id):
 
 @app_views.route('/reviews/<review_id>', methods=['PUT'], strict_slashes=False)
 def put_review(review_id):
+    """Updates a Review object"""
     review = storage.get(User, review_id)
     if not review:
         abort(404)
