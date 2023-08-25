@@ -14,6 +14,7 @@ def close_storage(exception=None):
     """Closes storage on teardown"""
     storage.close()
 
+
 @app.errorhandler(404)
 def not_found(e):
     """returns a JSON-formatted 404 status code"""
