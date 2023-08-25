@@ -61,6 +61,6 @@ def update_amenity(amenity_id):
         return jsonify({"error": "Not a JSON"}), 400
     for key, value in data.items():
         if key not in ['id', 'created_at', 'updated_at']:
-            setattr(state, key, value)
-    state.save()
-    return jsonify(state.to_dict()), 200
+            setattr(amenity, key, value)
+    amenity.save()
+    return jsonify(amenity.to_dict()), 200
