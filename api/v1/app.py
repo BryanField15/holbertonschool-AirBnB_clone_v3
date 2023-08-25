@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Does flask appy things"""
-from flask import Flask, current_app
+from flask import Flask, current_app, jsonify
 from models import storage
 from api.v1.views import app_views
 import os
@@ -13,6 +13,16 @@ app.register_blueprint(app_views)
 def close_storage(exception=None):
     """Closes storage on teardown"""
     storage.close()
+
+
+@app.errorhandler(404)
+def not_found(e):
+    """returns a JSON-formatted 404 status code"""
+    response = jsonify({
+        'error': 'Not found',
+    })
+    response.status_code = 404
+    return response
 
 if __name__ == "__main__":
     HBNB_API_HOST = os.environ.get('HBNB_API_HOST', '0.0.0.0')
