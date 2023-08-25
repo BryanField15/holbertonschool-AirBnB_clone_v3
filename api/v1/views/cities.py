@@ -4,9 +4,11 @@ from flask import Flask, jsonify, abort, request
 from models.city import City
 from api.v1.views import app_views
 from models import storage
+from models.state import State
 
 
-@app_views.route('/states/<state_id>/cities', methods=['GET'], strict_slashes=False)
+@app_views.route('/states/<state_id>/cities', methods=['GET'], 
+                 strict_slashes=False)
 def get_cities(state_id):
     """Retrieves the list of all City objects"""
     state = storage.get(State, state_id)
