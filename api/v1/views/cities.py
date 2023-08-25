@@ -2,6 +2,7 @@
 """View for Cityobjects that handles all default RESTFul API actions"""
 from flask import Flask, jsonify, abort, request
 from models.city import City
+from models.state import State
 from api.v1.views import app_views
 from models import storage
 
