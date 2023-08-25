@@ -8,7 +8,7 @@ from models import storage
 from models.state import State
 
 
-@app_views.route('/states/<state_id>/cities', methods=['GET'], 
+@app_views.route('/states/<state_id>/cities', methods=['GET'],
                  strict_slashes=False)
 def get_cities(state_id):
     """Retrieves the list of all City objects"""
@@ -59,7 +59,7 @@ def create_city(state_id):
     return jsonify(new_city.to_dict()), 201
 
 
-@app_views.route('/cities/<city_id>', methods=['PUT'], 
+@app_views.route('/cities/<city_id>', methods=['PUT'],
                  strict_slashes=False)
 def update_city(city_id):
     """Updates a City object"""
