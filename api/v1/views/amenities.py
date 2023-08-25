@@ -9,11 +9,13 @@ from models import storage
 @app_views.route('/amenities', methods=['GET'], strict_slashes=False)
 def get_amenities():
     """Retrieves the list of all Amenity objects"""
-    return jsonify([amenity.to_dict()
-                    for amenity in storage.all(Amenity).values()])
+    return jsonify(
+        [amenity.to_dict() for amenity in storage.all(Amenity).values()]
+    )
 
 
-@app_views.route('/amenities/<amenity_id>', methods=['GET'], strict_slashes=False)
+@app_views.route('/amenities/<amenity_id>',
+                 methods=['GET'], strict_slashes=False)
 def get_amenity(amenity_id):
     """Retrieves an Amenity object"""
     amenity = storage.get(Amenity, amenity_id)
@@ -47,7 +49,8 @@ def create_amenity():
     return jsonify(new_amenity.to_dict()), 201
 
 
-@app_views.route('/amenities/<amenity_id>', methods=['PUT'], strict_slashes=False)
+@app_views.route('/amenities/<amenity_id>',
+                 methods=['PUT'], strict_slashes=False)
 def update_amenity(amenity_id):
     """Updates an Amenity object"""
     amenity = storage.get(Amenity, amenity_id)
