@@ -1,12 +1,16 @@
 #!/usr/bin/python3
 """Does flask appy things"""
 from flask import Flask, current_app, jsonify
+from flask_cors import CORS
 from models import storage
 from api.v1.views import app_views
 import os
 
+
 app = Flask(__name__)
 app.register_blueprint(app_views)
+
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 @app.teardown_appcontext
