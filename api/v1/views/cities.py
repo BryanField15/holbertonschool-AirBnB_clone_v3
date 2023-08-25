@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""View for Cityobjects that handles all default RESTFul API actions"""
+"""View for City objects that handles all default RESTFul API actions"""
 from flask import Flask, jsonify, abort, request
 from models.city import City
 from models.state import State
@@ -7,7 +7,8 @@ from api.v1.views import app_views
 from models import storage
 
 
-@app_views.route('/states/<state_id>/cities', methods=['GET'], strict_slashes=False)
+@app_views.route('/states/<state_id>/cities', methods=['GET'],
+                 strict_slashes=False)
 def get_cities(state_id):
     """Retrieves the list of all City objects"""
     state = storage.get(State, state_id)
@@ -16,7 +17,8 @@ def get_cities(state_id):
     return jsonify([city.to_dict() for city in state.cities])
 
 
-@app_views.route('/cities/<city_id>', methods=['GET'], strict_slashes=False)
+@app_views.route('/cities/<city_id>', methods=['GET'],
+                 strict_slashes=False)
 def get_city(city_id):
     """Retrieves a City object"""
     city = storage.get(City, city_id)
@@ -25,7 +27,8 @@ def get_city(city_id):
     return jsonify(city.to_dict())
 
 
-@app_views.route('/cities/<city_id>', methods=['DELETE'], strict_slashes=False)
+@app_views.route('/cities/<city_id>', methods=['DELETE'],
+                 strict_slashes=False)
 def delete_city(city_id):
     """Deletes a City object"""
     city = storage.get(City, city_id)
