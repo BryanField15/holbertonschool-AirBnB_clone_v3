@@ -7,13 +7,13 @@ from models.user import User
 from api.v1.views import app_views
 from models import storage
 
+print("Places.py is being executed")
 
-@app_views.route('/cities/<city_id>/places', methods=['GET'],
-                 strict_slashes=False)
+@app_views.route('/cities/<city_id>/places', methods=['GET'], strict_slashes=False)
 def get_places_by_city(city_id):
     """Retrieves the list of all Place objects in a city"""
     city = storage.get(City, city_id)
-    if not city_dict:
+    if not city:
         abort(404)
     return jsonify([place.to_dict() for place in city.places])
 
