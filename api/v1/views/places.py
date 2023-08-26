@@ -39,8 +39,7 @@ def delete_place(place_id):
     return jsonify({}), 200
 
 
-@app_views.route('/cities/<city_id>/places', methods=['POST'],
-                 strict_slashes=False)
+@app_views.route('/cities/<city_id>/places', methods=['POST'], strict_slashes=False)
 def create_place_by_city(city_id):
     """Creates a Place"""
     data = request.get_json()
@@ -52,19 +51,6 @@ def create_place_by_city(city_id):
     new_place.city_id = city_id
     new_place.save()
     return jsonify(new_place.to_dict()), 201
-
-
-#@app_views.route('/places', methods=['POST'], strict_slashes=False)
-#def create_place():
-#    """Creates a Place"""
-#    data = request.get_json()
-#    if not data:
-#        return jsonify({"error": "Not a JSON"}), 400
-#    if 'name' not in data:
- #       return jsonify({"error": "Missing name"}), 400
-#    new_place = Place(**data)
-#    new_place.save()
-#    return jsonify(new_place.to_dict()), 201
 
 
 @app_views.route('/places/<place_id>', methods=['PUT'],
