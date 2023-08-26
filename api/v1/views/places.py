@@ -7,7 +7,6 @@ from models.user import User
 from api.v1.views import app_views
 from models import storage
 
-print("Places.py is being executed")
 
 @app_views.route('/cities/<city_id>/places', methods=['GET'], strict_slashes=False)
 def get_places_by_city(city_id):
