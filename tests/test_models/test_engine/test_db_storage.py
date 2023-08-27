@@ -96,7 +96,7 @@ class TestDBStorage(unittest.TestCase):
         current_count = models.storage.count(None)
         self.assertEqual(len(all_obj), current_count)
 
-   @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
+    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_count_with_new_state_object(self):
         """Test that count() of State increases by one"""
         current_count = models.storage.count(State)
