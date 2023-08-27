@@ -73,23 +73,36 @@ test_db_storage.py'])
 
 class TestDBStorage(unittest.TestCase):
     """Test the DBStorage class"""
-    def test_get_with_incorrect_para(self):
-        """Test get return object of an incrorect class and id"""
-        self.assertEqual(models.storage.get("Fake_cls", "Fake_id"), None)
+#    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
+    def test_get_with_cls_as_none(self):
+        """Test get() when cls is none"""
+        actual = storage.get(None, '1')
+        expected = None
+        self.assertEqual(actual, expected)
 
-    def test_get_with_newly_created_obj(self):
-        """Test get return object of a given class and id"""
-        new_obj = State(name="Holberton")
-        new_obj.save()
-        self.assertEqual(models.storage.get("State", new_obj.id), new_obj)
+#   @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
+    def test_get_with_state_class(self):
+        """Test get() when given a class and a state"""
+        expected = State(id='9a649fdb-15c9-4d01-bd56-0f8ea29a0')
+        expected.save()
+        actual = storage.get(State, '9a649fdb-15c9-4d01-bd56-0f8ea29a0')
+        self.assertEqual(actual, expected)
 
-    def test_count(self):
-        """Test count return correct total number of a given class objects"""
+#    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
+    def test_count_with_none(self):
+        """Test that count() returns number of all objects in storage
+        if cls is none"""
+        all_obj = models.storage.all()
+        current_count = models.storage.count(None)
+        self.assertEqual(len(all_obj), current_count)
+
+#    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
+    def test_count_with_new_state_object(self):
+        """Test that count() of State increases by one"""
         current_count = storage.count(State)
-        new_state = State(name="PLD")
+        new_state = State(name='Betty')
         new_state.save()
-        new_count = storage.count(State)
-        self.assertEqual((current_count + 1), new_count)
+        self.assertEqual(storage.count(State), current_count + 1)
 
 
 class TestFileStorage(unittest.TestCase):
