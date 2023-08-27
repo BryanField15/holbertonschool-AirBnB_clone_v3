@@ -76,7 +76,7 @@ class TestDBStorage(unittest.TestCase):
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_get_with_cls_as_none(self):
         """Test get() when cls is none"""
-        actual = models.storage.get(None, '1')
+        actual = storage.get(None, '1')
         expected = None
         self.assertEqual(actual, expected)
 
@@ -85,7 +85,7 @@ class TestDBStorage(unittest.TestCase):
         """Test get() when given a class and a state"""
         expected = State(id='9a649fdb-15c9-4d01-bd56-0f8ea29a0')
         expected.save()
-        actual = models.storage.get(State, '9a649fdb-15c9-4d01-bd56-0f8ea29a0')
+        actual = storage.get(State, '9a649fdb-15c9-4d01-bd56-0f8ea29a0')
         self.assertEqual(actual, expected)
 
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
