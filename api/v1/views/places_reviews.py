@@ -60,10 +60,9 @@ def post_review(place_id):
     user = storage.get(User, data['user_id'])
     if not user:
         abort(404)
-    if 'text' not in data:
+    if 'text' not in data.keys():
         abort(400, "Missing text")
     review = User.create(**data)
-    place.reviews.append(review)
     storage.save()
     return jsonify(review.to_dict()), 201
 
