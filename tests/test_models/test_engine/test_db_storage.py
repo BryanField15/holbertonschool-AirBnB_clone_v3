@@ -80,7 +80,7 @@ class TestDBStorage(unittest.TestCase):
         expected = None
         self.assertEqual(actual, expected)
 
-   @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
+    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_get_with_state_class(self):
         """Test get() when given a class and a state"""
         expected = State(id='9a649fdb-15c9-4d01-bd56-0f8ea29a0')
