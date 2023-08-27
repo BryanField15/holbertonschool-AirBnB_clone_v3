@@ -73,14 +73,14 @@ test_db_storage.py'])
 
 class TestDBStorage(unittest.TestCase):
     """Test the DBStorage class"""
-#    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
+    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_get_with_cls_as_none(self):
         """Test get() when cls is none"""
         actual = models.storage.get(None, '1')
         expected = None
         self.assertEqual(actual, expected)
 
-#   @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
+   @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_get_with_state_class(self):
         """Test get() when given a class and a state"""
         expected = State(id='9a649fdb-15c9-4d01-bd56-0f8ea29a0')
@@ -88,7 +88,7 @@ class TestDBStorage(unittest.TestCase):
         actual = models.storage.get(State, '9a649fdb-15c9-4d01-bd56-0f8ea29a0')
         self.assertEqual(actual, expected)
 
-#    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
+    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_count_with_none(self):
         """Test that count() returns number of all objects in storage
         if cls is none"""
@@ -96,7 +96,7 @@ class TestDBStorage(unittest.TestCase):
         current_count = models.storage.count(None)
         self.assertEqual(len(all_obj), current_count)
 
-#   @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
+   @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_count_with_new_state_object(self):
         """Test that count() of State increases by one"""
         current_count = models.storage.count(State)
